@@ -12,6 +12,6 @@ public class Call {
         Calculator calculator = new SubCalc();
         Integer result = calculator.calc(10, 5);
 
-        System.out.println("계산 결과는 (" +result+ ") 입니다.");
+        System.out.println("계산 결과는 (" +result+ ") 입니다..");
     }
 }
