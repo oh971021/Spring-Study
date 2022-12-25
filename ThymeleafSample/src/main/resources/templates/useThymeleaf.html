@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1 th:text="${hello}">표시하는 부분</h1>
+
+    <div>
+        .으로 접근 : <span th:text="${mb.id}">ID</span> - <span th:text="${mb.name}">이름</span><br>
+        []로 접근 : <span th:text="${mb['id']}">ID</span> - <span th:text="${mb['name']}">이름</span>
+    </div>
+
+    <th:block th:object="${mb}">
+        .으로 접근 : <span th:text="*{id}">ID</span> - <span th:text="*{name}">이름</span><br>
+        []로 접근 : <span th:text="*{['id']}">ID</span> - <span th:text="*{['name']}">이름</span>
+    </th:block>
+
+    <br>
+
+    <span th:text="${list[0]}">방위</span>
+    <span th:text="${list[1]}">방위</span>
+    <span th:text="${list[2]}">방위</span>
+    <span th:text="${list[3]}">방위</span>
+
+    <br>
+
+    .으로 접근: <span th:text="${map.hong.name}">이름</span> -
+    <span th:text="${map.kim.name}">이름2</span>
+
+    []로 접근: <span th:text="${map['hong']['name']}">이름</span> -
+    <span th:text="${map['kim']['name']}">이름2</span>
+
+    <div th:each="member : ${members}">
+        <p>[[${member.id}]] : [[${member.name}]]</p>
+    </div>
+
+    <br>
+
+    <div th:each="member, s : ${members}" th:object="${member}">
+        <p>
+            index -> [[${s.index}]], count -> [[${s.count}]],
+            size -> [[${s.size}]], current -> [[${s.current}]],
+            even -> [[${s.even}]], odd -> [[${s.odd}]],
+            first -> [[${s.first}]], last -> [[${s.last}]],
+            [[*{id}]] : [[*{name}]]
+        </p>
+    </div>
+
+    <div th:with="x=1000000, y=123456.789">
+        정수 형식 :
+        <span th:text="${#numbers.formatInteger(x, 3, 'COMMA')}"></span>
+        <br>
+        부동 소수점 방식 :
+        <span th:text="${#numbers.formatDecimal(y, 3, 'COMMA', 2, 'POINT')}"></span>
+    </div>
+
+    <div th:with="today=${#dates.createNow()}">
+        형식 별 Date 출력 :
+        <span th:text="${#dates.format(today, 'yyyy/mm/dd')}"/><br>
+        <span th:text="${#dates.format(today, 'yyyy년 mm월 mm일')}"/><br>
+        <span th:text="${#dates.year(today)}"/><br>
+        <span th:text="${#dates.month(today)}"/><br>
+        <span th:text="${#dates.day(today)}"/><br>
+        <span th:text="${#dates.dayOfWeek(today)}"/><br>
+        <span th:text="${#dates.dayOfWeekName(today)}"/><br>
+        <span th:text="${#dates.dayOfWeekNameShort(today)}"/><br>
+    </div>
+
+    <div th:with="str1='abcdef'">
+        대문자 변환: <span th:text="${#strings.toUpperCase(str1)}"/>
+        빈 문자열 판정: <span th:text="${#strings.isEmpty(str1)}"/>
+        길이: <span th:text="${#strings.length(str1)}"/>
+    </div>
+
+    <h1>Fragment 사용</h1>
+
+    <div id="one" th:insert="fragment :: one"/>
+    <div id="two" th:replace="fragment :: two"/>
+
+    <div id="three" th:replace="fragment :: three"/>
+
+</body>
+</html>

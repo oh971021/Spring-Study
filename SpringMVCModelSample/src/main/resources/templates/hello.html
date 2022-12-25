@@ -5,6 +5,52 @@
     <title>Title</title>
 </head>
 <body>
-    <h1 th:text="${msg}"> 표시되는 부분 </h1>
+    <!-- 01: 직접 문자 삽입 -->
+    <h1 th:text="'hello World'"> 표시되는 부분 </h1>
+
+    <!-- 02: 인라인 처리 -->
+    <h1>안녕하세요! [[${name}]] 씨</h1>
+
+    <!-- 03: 값 결합 -->
+    <h1 th:text="'오늘 날씨는 ' + '맑음' + '입니다.'">표시되는 부분</h1>
+
+    <!-- 04: 값 결합(리터럴 치환) -->
+    <h1 th:text="|안녕하세요 ${name}씨|">표시되는 부분</h1>
+
+    <!-- 05: 지역 변수 -->
+    <div th:with="a=1,b=2">
+        <span th:text="|${a}+${b}=${a+b}|"/>
+    </div>
+
+    <!-- 06: 비교와 동기 -->
+    <span th:text="1 > 10">뭐고</span>
+    <span th:text="1 < 10">뭐야</span>
+    <span th:text="1 >= 10"></span>
+    <span th:text="1 <= 10"></span>
+    <span th:text="1 == 10"></span>
+    <span th:text="1 != 10"></span>
+    <span th:text="길동 == 길동"></span>
+    <span th:text="길동 != 길동"></span>
+
+    <!-- 07: 조건 연산자 -->
+    <p th:text="${name} == '준석사마' ? '준석사마 오셨습니다!' : '준석사마가 아닙니다.'"/>
+
+    <!-- 08: 조건 분기(True) -->
+    <div th:if="${name} == '준석사마'">
+        <p>준석사마 오셨습니다!</p>
+    </div>
+
+    <!-- 09: 조건 분기(False) -->
+    <div th:unless="${name} == '솔리사마'">
+        <p>솔리사마가 아닙니다.</p>
+    </div>
+
+    <!-- 10: Switch -->
+    <div th:switch="${name}">
+        <p th:case="준석사마" th:text="|${name}입니다!|"/>
+        <p th:case="솔리사마" th:text="|${name}입니다!|"/>
+        <p th:case="*">명부에 없습니다.</p>
+    </div>
+
 </body>
 </html>
