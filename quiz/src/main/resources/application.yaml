@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    password: 5959
+    username: root
+    url: jdbc:mysql://localhost:3306/quizdb?serverTimezone=UTC&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
