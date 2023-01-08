@@ -31,6 +31,9 @@ public class QuizApplication {
 		//	showList();
 		//	1건 조회
 		//	showOne();
+		//	변경 처리
+		//  updateQuiz();
+		deleteQuiz();
 	}
 
 	/** === 퀴즈 2건을 등록합니다 === */
@@ -77,6 +80,21 @@ public class QuizApplication {
 
 	/** === 변경 처리 === */
 	private void updateQuiz() {
-		System.out.println("--- 변경처리 합니다. ---");
+		System.out.println("--- 변경 처리 개시 ---");
+		// 변경할 엔티티 생성
+		Quiz quiz1 = new Quiz(1, "스프링은 프레임워크입니까?", true, "변경준석");
+		// 변경 처리
+		quiz1 = repository.save(quiz1);
+		// 변경 결과 확인
+		System.out.println("변경 된 데이터는 "+ quiz1 +"입니다.");
+		System.out.println("--- 변경 처리 완료 ---");
+	}
+
+	/** === 삭제 처리 === */
+	private void deleteQuiz() {
+		System.out.println("--- 삭제 처리 개시 ---");
+		// 삭제 실행
+		repository.deleteById(2);
+		System.out.println("--- 삭제 처리 완료 ---");
 	}
 }
